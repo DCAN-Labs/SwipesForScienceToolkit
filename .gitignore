@@ -1,2 +1,5 @@
 data/*.json
 data/*.csv
+*_anonymized
+*_samples
+*_users

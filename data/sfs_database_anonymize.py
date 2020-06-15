@@ -3,6 +3,7 @@
 import csv
 import json
 import os
+import re
 import sys
 
 database_json = os.path.abspath(sys.argv[1])
@@ -25,8 +26,26 @@ for i, sample in enumerate(db['sampleCounts']):
     anon_sample = 'sample_%06d' % i
     sample_lookup[sample] = anon_sample
 
+subject_lookup = {}
+subject_idx = 0
 for sample in sample_lookup:
-    anon_sample = sample_lookup[sample]
+    splits = sample.split('_')
+    for chunk in splits:
+        if 'NDARINV' in chunk and chunk not in subject_lookup:
+            subject_lookup[chunk] = 'subject_%06d' % subject_idx
+            subject_idx += 1
+
+
+for sample in sample_lookup:
+    splits = sample.split('_')
+    for i, chunk in enumerate(splits):
+        if 'NDARINV' in chunk:
+            splits[i] = subject_lookup['chunk']
+        if i == 0:
+            anon_sample = '_'.join([ splits[0] , splits[2:] ])
+        else:
+            anon_sample = '_'.join([ 'gold', splits[1] , splits[3:] ])
+
     db['sampleCounts'][anon_sample] = db['sampleCounts'].pop(sample)
 
 
@@ -67,8 +86,7 @@ for vote in votes:
         db['votes'][vote]['user'] = user_lookup[user]
 
     except:
-        print(db['votes'].pop(vote))
-
+        db['votes'].pop(vote)
 
 
 with open(anonymized_json, 'w') as f:
