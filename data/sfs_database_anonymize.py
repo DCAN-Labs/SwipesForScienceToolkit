@@ -1,4 +1,4 @@
-#! python3
+#! /usr/bin/env python3
 
 import csv
 import json
@@ -24,6 +24,9 @@ sample_lookup = {}
 for i, sample in enumerate(db['sampleCounts']):
     anon_sample = 'sample_%06d' % i
     sample_lookup[sample] = anon_sample
+
+for sample in sample_lookup:
+    anon_sample = sample_lookup[sample]
     db['sampleCounts'][anon_sample] = db['sampleCounts'].pop(sample)
 
 
@@ -31,35 +34,49 @@ user_lookup = {}
 for i, user in enumerate(db['users']):
     anon_user = 'user_%04d' % i
     user_lookup[user] = anon_user
+
+for user in user_lookup:
+    anon_user = user_lookup[user]
     db['users'][anon_user] = db['users'].pop(user)
 
 
-for sample in db['sampleSummary']:
+sampleSummary = db['sampleSummary'].copy()
+for sample in sampleSummary:
     anon_sample = sample_lookup[sample]
     db['sampleSummary'][anon_sample] = db['sampleSummary'].pop(sample)
 
 
-for user in db['userSeenSamples']:
+userSeenSamples = db['userSeenSamples'].copy()
+for user in userSeenSamples:
     anon_user = user_lookup[user]
     db['userSeenSamples'][anon_user] = db['userSeenSamples'].pop(user)
-    for sample in db['userSeenSamples'][anon_user]:
+
+    userSeenSamples_user = userSeenSamples[user].copy()
+    for sample in userSeenSamples_user:
         anon_sample = sample_lookup[sample]
         db['userSeenSamples'][anon_user][anon_sample] = db['userSeenSamples'][anon_user].pop(sample)
 
 
-for vote in db['votes']:
-    sample = db['votes'][vote]['sample']
-    user = db['votes'][vote]['user']
-    db['votes'][vote]['sample'] = sample_lookup[sample]
-    db['votes'][vote]['user'] = user_lookup[user]
+votes = db['votes'].copy()
+for vote in votes:
+    try:
+        sample = db['votes'][vote]['sample']
+        user = db['votes'][vote]['user']
+
+        db['votes'][vote]['sample'] = sample_lookup[sample]
+        db['votes'][vote]['user'] = user_lookup[user]
+
+    except:
+        print(db['votes'].pop(vote))
+
 
 
 with open(anonymized_json, 'w') as f:
-    json.dump(db, f, indent=2)
+    json.dump(db, f, sort_keys=True, indent=2)
 
 with open(sample_json, 'w') as f:
-    json.dump(sample_lookup, f, indent=2)
+    json.dump(sample_lookup, f, sort_keys=True, indent=2)
 
 with open(users_json, 'w') as f:
-    json.dump(user_lookup, f, indent=2)
+    json.dump(user_lookup, f, sort_keys=True, indent=2)
 
