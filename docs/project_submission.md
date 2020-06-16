@@ -20,6 +20,9 @@ From the [Oregon Health & Science University (OHSU) Developmental Cognition and 
 **Hub**: The Americas
 <!--Asia and Pacific / Europe, Middle East and Africa / The Americas based on location of project lead. Possibly more than 1 hub.-->
 
+
+**Maximum number of participants**: 6 (+ 2 leads)
+
 **Description**:
 <!--Describe the main idea and context of your project in a few sentences.-->
 
@@ -29,7 +32,7 @@ From the [Oregon Health & Science University (OHSU) Developmental Cognition and 
 
 Swipes For Science is a web application to expedite visual quality control and can easily be set up and customized for any researcher’s personal needs. It was designed by Anisha Keshavan, PhD, et al, and inspired by the Tinder app. Scientists of any skill level can create an account and swipe left or right to judge an image as Pass or Fail. Each vote is recorded into a live online database that can be visualized for efficient data inclusion or exclusion in a study. While this platform can be simply leveraged by experts on a small scale to make the quality control process more efficient and organized it may also be used to crowd source quality control by “citizen scientists” for large-scale datasets with proven accuracy that matches expert raters.
 
-We have a unique opportunity at this OHBM Brainhack 2020 for you to both setup your own Swipes For Science site and to create exploratory data analysis tools with anonymized data collected from an existent Swipes For Science site. The dataset we’ve included is for QC of outputs from the minimal preprocessing pipeline for HCP.
+We have a unique opportunity at this OHBM Brainhack 2020 for you to both setup your own Swipes For Science site and to create exploratory data analysis tools with anonymized data collected from an existent Swipes For Science site. The dataset we’ve included is for QC of outputs from the lightly modified DCAN Labs HCP minimal preprocessing pipeline.
 
 You can imagine answering questions like:
 - For all the images associated with one subject's data, should that entire subject be considered a Pass or Fail for inclusion in further analysis?
@@ -51,9 +54,9 @@ You can imagine answering questions like:
 
 **Good first issues**:
 
-- Import data from json format and summarize in a digestable format
-- Report basic statistics on subjects and/or users
-- Visualize swipe data
+- Import data from JSON format and summarize in a digestible format like CSV.  
+- Report basic statistics on subjects and/or users.  
+- Visualize swipe data.  
 
 **Skills**:
 
@@ -101,14 +104,14 @@ Please include the following above (all required):
 -   [x] Link to your project: could be a code repository, a shared document, etc. See [here](https://github.com/ohbm/hackathon2020/blob/master/.github/ISSUE_TEMPLATE/handbooks/projects.md#link-to-project)
 -   [x] Include your [Mattermost handle](https://mattermost.brainhack.org/) (i.e. your username). If you do not have an account, please [sign up here](https://mattermost.brainhack.org/signup_email).
 -   [x] Goals for the OHBM Brainhack: describe what you want to achieve during this brainhack. See [here](https://github.com/ohbm/hackathon2020/blob/master/.github/ISSUE_TEMPLATE/handbooks/projects.md#goals).
--   [ ] Flesh out at least 2 "good first issues": those are tasks that do not require any prior knowledge about your project, could be defined as issues in a GitHub repository, or in a shared document, cf [here](https://github.com/ohbm/hackathon2020/blob/master/.github/ISSUE_TEMPLATE/handbooks/projects.md#onboarding-2-good-first-issues).
+-   [x] Flesh out at least 2 "good first issues": those are tasks that do not require any prior knowledge about your project, could be defined as issues in a GitHub repository, or in a shared document, cf [here](https://github.com/ohbm/hackathon2020/blob/master/.github/ISSUE_TEMPLATE/handbooks/projects.md#onboarding-2-good-first-issues).
 -   [x] Skills: list skills that would be particularly suitable for your project. We ask you to include at least one non-coding skill, cf. [here](https://github.com/ohbm/hackathon2020/blob/master/.github/ISSUE_TEMPLATE/handbooks/projects.md#onboarding-skills).
 -   [x] Chat channel: A link to a chat channel that will be used during the OHBM Brainhack. This can be an existing channel or a new one. We recommend using the [Brainhack space on mattermost](https://mattermost.brainhack.org/), cf. [here](https://github.com/ohbm/hackathon2020/blob/master/.github/ISSUE_TEMPLATE/handbooks/projects.md#chat).
--   [ ] Video channel: Please create a video channel that will be used during the OHBM Brainhack and share it in your chat channel above. This can be an existing channel or a new one. For instance a [jitsi meet](https://meet.jit.si/) room, cf. [here](https://github.com/ohbm/hackathon2020/blob/master/.github/ISSUE_TEMPLATE/handbooks/projects.md#video-calls).
+-   [x] Video channel: Please create a video channel that will be used during the OHBM Brainhack and share it in your chat channel above. This can be an existing channel or a new one. For instance a [jitsi meet](https://meet.jit.si/) room, cf. [here](https://github.com/ohbm/hackathon2020/blob/master/.github/ISSUE_TEMPLATE/handbooks/projects.md#video-calls).
 -   [x] Provide an image of your project for the OHBM brainhack website
 
 You can also include information about (all optional):
--   [ ] Number of participants, cf. [here](https://github.com/ohbm/hackathon2020/blob/master/.github/ISSUE_TEMPLATE/handbooks/projects.md#participant-capacity)
+-   [x] Number of participants, cf. [here](https://github.com/ohbm/hackathon2020/blob/master/.github/ISSUE_TEMPLATE/handbooks/projects.md#participant-capacity)
 -   [ ] Twitter-size summary of your project pitch, cf. [here](https://github.com/ohbm/hackathon2020/blob/master/.github/ISSUE_TEMPLATE/handbooks/projects.md#twitter-size-summary-of-your-project-pitch)
 -   [ ] Set up a kanban board on your repository to better divide the work and keep track of things, cf [here](https://github.com/ohbm/hackathon2020/blob/master/.github/ISSUE_TEMPLATE/handbooks/projects.md#set-up-a-kanban-board)
 -   [ ] Project snippet for the OHBM Brainhack website, cf. [here](https://github.com/ohbm/hackathon2020/blob/master/.github/ISSUE_TEMPLATE/handbooks/projects.md#project-snippet-for-the-ohbm-brainhack-website)
