@@ -7,7 +7,6 @@ import re
 import sys
 
 database_json = os.path.abspath(sys.argv[1])
-database_json = '/Users/andersperrone/Projects/ohbm_hackathon_2020/SwipesForScienceToolkit/data/abcd-func-export.json'
 anonymized_json = database_json + '_anonymized'
 sample_json =  database_json + '_samples'
 users_json = database_json + '_users'
@@ -31,6 +30,7 @@ for sample in sampleCounts:
     splits = sample.split('_')
     for i, chunk in enumerate(splits):
         if 'NDARINV' in chunk:
+
             # create anonymous subject id and add to subject lookup dict
             if chunk not in subject_lookup.keys():
                 subject_idx += 1
@@ -38,11 +38,13 @@ for sample in sampleCounts:
                 subject_lookup[chunk] = anon_subject
             else:
                 anon_subject = subject_lookup[chunk]
+
             # replace subject id in sample name
             if i == 0:
                 anon_sample = '_'.join([anon_subject] + splits[2:])
             else:
                 anon_sample = '_'.join(['gold', anon_subject] + splits[3:])
+
             # replace
             sample_lookup[sample] = anon_sample
             db['sampleCounts'][anon_sample] = db['sampleCounts'].pop(sample)
