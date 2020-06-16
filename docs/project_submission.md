@@ -27,19 +27,17 @@ From the [Oregon Health & Science University (OHSU) Developmental Cognition and 
 >
 > ~ Swipes For Science
 
-Swipes For Science is a citizen science game framework brought to life by Anisha Keshavan, PhD, et al, inspired by Tinder.  Citizen scientists swipe left or right to judge an image as Pass or Fail and each vote is recorded into a live online database.
+Swipes For Science is a web application to expedite visual quality control and can easily be set up and customized for any researcher’s personal needs. It was designed by Anisha Keshavan, PhD, et al, and inspired by the Tinder app. Scientists of any skill level can create an account and swipe left or right to judge an image as Pass or Fail. Each vote is recorded into a live online database that can be visualized for efficient data inclusion or exclusion in a study. While this platform can be simply leveraged by experts on a small scale to make the quality control process more efficient and organized it may also be used to crowd source quality control by “citizen scientists” for large-scale datasets with proven accuracy that matches expert raters.
 
-We have a unique opportunity at this OHBM Brainhack 2020 for you to both setup your own Swipes For Science site and to create exploratory data analysis tools with anonymized data collected from an existent Swipes For Science site.
+We have a unique opportunity at this OHBM Brainhack 2020 for you to both setup your own Swipes For Science site and to create exploratory data analysis tools with anonymized data collected from an existent Swipes For Science site. The dataset we’ve included is for QC of outputs from the minimal preprocessing pipeline for HCP.
 
 You can imagine answering questions like:
-
 - For all the images associated with one subject's data, should that entire subject be considered a Pass or Fail for inclusion in further analysis?
 - For all ratings provided by citizen scientist ABC, how reliably does ABC vote compared to the gold standard data?
 - Among all citizen scientists, who are the best raters?
 - What is the inter-rater reliability on image XYZ?
-- ... and more!
-
-(Anders to add more here...)
+- How can we use deep learning to align crowd sourced QC data with gold standard expert evaluation.
+... and more!
 
 **Link to project**: https://github.com/DCAN-Labs/SwipesForScienceToolkit
 
@@ -52,6 +50,10 @@ You can imagine answering questions like:
 3. Create Exploratory Data Analysis Tools for SwipesForScience data
 
 **Good first issues**:
+
+- Import data from json format and summarize in a digestable format
+- Report basic statistics on subjects and/or users
+- Visualize swipe data
 
 **Skills**:
 
