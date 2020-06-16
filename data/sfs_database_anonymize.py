@@ -7,9 +7,11 @@ import re
 import sys
 
 database_json = os.path.abspath(sys.argv[1])
+database_json = '/Users/andersperrone/Projects/ohbm_hackathon_2020/SwipesForScienceToolkit/data/abcd-func-export.json'
 anonymized_json = database_json + '_anonymized'
 sample_json =  database_json + '_samples'
 users_json = database_json + '_users'
+subject_json = database_json + '_subjects'
 
 
 with open(database_json, 'r') as f:
@@ -22,31 +24,30 @@ del db['userSettings']
 
 
 sample_lookup = {}
-for i, sample in enumerate(db['sampleCounts']):
-    anon_sample = 'sample_%06d' % i
-    sample_lookup[sample] = anon_sample
-
 subject_lookup = {}
 subject_idx = 0
-for sample in sample_lookup:
-    splits = sample.split('_')
-    for chunk in splits:
-        if 'NDARINV' in chunk and chunk not in subject_lookup:
-            subject_lookup[chunk] = 'subject_%06d' % subject_idx
-            subject_idx += 1
-
-
-for sample in sample_lookup:
+sampleCounts = db['sampleCounts'].copy()
+for sample in sampleCounts:
     splits = sample.split('_')
     for i, chunk in enumerate(splits):
         if 'NDARINV' in chunk:
-            splits[i] = subject_lookup['chunk']
-        if i == 0:
-            anon_sample = '_'.join([ splits[0] , splits[2:] ])
-        else:
-            anon_sample = '_'.join([ 'gold', splits[1] , splits[3:] ])
+            # create anonymous subject id and add to subject lookup dict
+            if chunk not in subject_lookup.keys():
+                subject_idx += 1
+                anon_subject = 'subject_%06d' % subject_idx
+                subject_lookup[chunk] = anon_subject
+            else:
+                anon_subject = subject_lookup[chunk]
+            # replace subject id in sample name
+            if i == 0:
+                anon_sample = '_'.join([anon_subject] + splits[2:])
+            else:
+                anon_sample = '_'.join(['gold', anon_subject] + splits[3:])
+            # replace
+            sample_lookup[sample] = anon_sample
+            db['sampleCounts'][anon_sample] = db['sampleCounts'].pop(sample)
 
-    db['sampleCounts'][anon_sample] = db['sampleCounts'].pop(sample)
+
 
 
 user_lookup = {}
@@ -97,4 +98,7 @@ with open(sample_json, 'w') as f:
 
 with open(users_json, 'w') as f:
     json.dump(user_lookup, f, sort_keys=True, indent=2)
+
+with open(subject_json, 'w') as f:
+    json.dump(subject_lookup, f, sort_keys=True, indent=2)
 
