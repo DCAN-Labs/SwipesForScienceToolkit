@@ -7,7 +7,7 @@ import re
 import sys
 
 # database_json = os.path.abspath(sys.argv[1])
-database_json = 'data\\db-t1_to_atlas_reg.json'
+database_json = 'data\\db-func_to_t1_reg.json'
 
 sampleCounts_csv = database_json + '_sampleCounts.csv'
 sampleSummary_csv = database_json + '_sampleSummary.csv'
@@ -26,9 +26,9 @@ votes_dict = db['votes']
 
 # sampleCounts
 with open('data\\sampleCounts_header.csv', 'r') as f:
-    header = f.readline()
+    header = f.readline().split(',')
 
-with open(sampleCounts_csv, 'w') as f:
+with open(sampleCounts_csv, 'w', newline='') as f:
     writer = csv.DictWriter(f, fieldnames=header)
 
     writer.writeheader()
@@ -41,9 +41,9 @@ with open(sampleCounts_csv, 'w') as f:
 
 # sampleSummary
 with open('data\\sampleSummary_header.csv', 'r') as f:
-    header = f.readline()
+    header = f.readline().split(',')
 
-with open(sampleSummary_csv, 'w') as f:
+with open(sampleSummary_csv, 'w', newline='') as f:
     writer = csv.DictWriter(f, fieldnames=header)
 
     writer.writeheader()
@@ -57,9 +57,9 @@ with open(sampleSummary_csv, 'w') as f:
 
 # userSeenSamples
 with open('data\\userSeenSamples_header.csv', 'r') as f:
-    header = f.readline()
+    header = f.readline().split(',')
 
-with open(userSeenSamples_csv, 'w') as f:
+with open(userSeenSamples_csv, 'w', newline='') as f:
     writer = csv.DictWriter(f, fieldnames=header)
 
     writer.writeheader()
@@ -74,28 +74,53 @@ with open(userSeenSamples_csv, 'w') as f:
 
 # users
 with open('data\\users_header.csv', 'r') as f:
-    header = f.readline()
+    header = f.readline().split(',')
 
-with open(users_csv, 'w') as f:
+with open(users_csv, 'w', newline='') as f:
     writer = csv.DictWriter(f, fieldnames=header)
 
     writer.writeheader()
     for user in users_dict:
+        if 'admin' in users_dict[user]:
+            admin = users_dict[user]['admin']
+        else:
+            admin = ''
+
+        if 'consent' in users_dict[user]:
+            consent = users_dict[user]['consent']
+        else:
+            consent = ''
+
+        if 'level' in users_dict[user]:
+            level = users_dict[user]['level']
+        else:
+            level = ''
+
+        if 'score' in users_dict[user]:
+            score = users_dict[user]['score']
+        else:
+            score = ''
+
+        if 'taken_tutorial' in users_dict[user]:
+            taken_tutorial = users_dict[user]['taken_tutorial']
+        else:
+            taken_tutorial = ''
+
         writer.writerow({
             'user': user ,
-            'admin': users_dict[user]['admin'] ,
-            'consent': users_dict[user]['consent'] ,
-            'level': users_dict[user]['level'] ,
-            'score': users_dict[user]['score'] ,
-            'taken_tutorial': users_dict[user]['taken_tutorial']
+            'admin': admin ,
+            'consent': consent ,
+            'level': level ,
+            'score': score ,
+            'taken_tutorial': taken_tutorial
             })
 
 
 # votes
 with open('data\\votes_header.csv', 'r') as f:
-    header = f.readline()
+    header = f.readline().split(',')
 
-with open(votes_csv, 'w') as f:
+with open(votes_csv, 'w', newline='') as f:
     writer = csv.DictWriter(f, fieldnames=header)
 
     writer.writeheader()
