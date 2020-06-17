@@ -8,9 +8,9 @@ import sys
 
 database_json = os.path.abspath(sys.argv[1])
 anonymized_json = database_json + '_anonymized'
-sample_json =  database_json + '_samples'
+sample_json = database_json + '_samples'
 users_json = database_json + '_users'
-subject_json = database_json + '_subjects'
+subject_json = os.path.abspath('anonymized_subjects_map.json')
 
 
 with open(database_json, 'r') as f:
@@ -23,8 +23,13 @@ del db['userSettings']
 
 
 sample_lookup = {}
-subject_lookup = {}
-subject_idx = 0
+if os.path.exists(subject_json):
+    with open(subject_json, 'r') as f:
+        subject_lookup = json.load(f)
+        subject_idx = len(subject_lookup)
+else:
+    subject_lookup = {}
+    subject_idx = 0
 sampleCounts = db['sampleCounts'].copy()
 for sample in sampleCounts:
     splits = sample.split('_')
