@@ -4,23 +4,33 @@
 
 For all ratings provided by citizen scientist ABC, how reliably does ABC vote compared to the gold standard data?  (How raters do versus gold standard/ground truth rated data?)
 
-- threshold for frequency of ahgreement with gold standard
+- threshold for frequency of agreement with gold standard
 - percentage match with gold standard rating
+    - One percentage score for each user overall; OR
+    - Frequency of match on pass vs match on fail
+    - The same could be done with vote consensus instead of ground truth
+- Percentage of Type I errors vs Type II errors
 
-Among all citizen scientists, who are the best raters?
+Among all citizen scientists, who are the best raters?  How well are reviewers doing?  Some metrics would be good.
 
-- highest agreeemnt with gold standard ratings
+- highest agreement with gold standard ratings
+    - ranking
 - cutoff for top 5 or top 10 percent of raters
+    - could use different rating metrics:
+        - Number of votes (Leaderboard)
+        - Percent of gold standard matches
+        - Percent of consensus agreement
+- consistency, a.k.a. seeing the same sample more than once and voting the same or different (not quite inter-rater reliability)
+    - would require multiple views of same samples
+- frequency of swiping left vs right
+    - scatter plot?
+    - two bin histogram
+- time taken to swipe images (a distribution)
+    - historam?
 
 What is the inter-rater reliability on image XYZ?
 
 - https://en.wikipedia.org/wiki/Cohen%27s_kappa
-
-How well are reviewers doing?  Some metrics would be good.
-
-- consistency (not quite inter-rater reliability)
-- frequency of swiping left vs right
-- time taken to swipe images (a distribution)
 
 Of this set, are you getting worse quality images from a specific age range?
 
