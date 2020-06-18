@@ -9,8 +9,8 @@ import sys
 database_json = os.path.abspath(sys.argv[1])
 anonymized_json = database_json + '_anonymized'
 sample_json = database_json + '_samples'
-users_json = database_json + '_users'
-subject_json = os.path.abspath('anonymized_subjects_map.json')
+user_json = os.path.abspath('/Users/andersperrone/Projects/ohbm_hackathon_2020/SwipesForScienceToolkit/data/anonymized_user_map.json')
+subject_json = os.path.abspath('/Users/andersperrone/Projects/ohbm_hackathon_2020/SwipesForScienceToolkit/data/anonymized_subjects_map.json')
 
 
 with open(database_json, 'r') as f:
@@ -30,6 +30,7 @@ if os.path.exists(subject_json):
 else:
     subject_lookup = {}
     subject_idx = 0
+
 sampleCounts = db['sampleCounts'].copy()
 for sample in sampleCounts:
     splits = sample.split('_')
@@ -55,17 +56,24 @@ for sample in sampleCounts:
             db['sampleCounts'][anon_sample] = db['sampleCounts'].pop(sample)
 
 
+if os.path.exists(user_json):
+    with open(user_json, 'r') as f:
+        user_lookup = json.load(f)
+        user_idx = len(user_lookup)
+else:
+    user_lookup = {}
+    user_idx = 0
 
-
-user_lookup = {}
-for i, user in enumerate(db['users']):
-    anon_user = 'user_%04d' % i
-    user_lookup[user] = anon_user
-
-for user in user_lookup:
-    anon_user = user_lookup[user]
-    db['users'][anon_user] = db['users'].pop(user)
-
+users = db['users'].copy()
+for user in users:
+    if user in user_lookup:
+        anon_user = user_lookup[user]
+        db['users'][anon_user] = db['users'].pop(user)
+    else:
+        user_idx += 1
+        anon_user = 'user_%04d' % user_idx
+        user_lookup[user] = anon_user
+        db['users'][anon_user] = db['users'].pop(user)
 
 sampleSummary = db['sampleSummary'].copy()
 for sample in sampleSummary:
@@ -103,7 +111,7 @@ with open(anonymized_json, 'w') as f:
 with open(sample_json, 'w') as f:
     json.dump(sample_lookup, f, sort_keys=True, indent=2)
 
-with open(users_json, 'w') as f:
+with open(user_json, 'w') as f:
     json.dump(user_lookup, f, sort_keys=True, indent=2)
 
 with open(subject_json, 'w') as f:
